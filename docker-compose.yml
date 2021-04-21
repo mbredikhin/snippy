@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: app
+    build: ./
+    command: ./scripts/wait-for-postgres.sh db air -c ./.air.conf
+    volumes:
+      - ./pkg/handler:/go/pkg/handler
+      - ./pkg/repository:/go/pkg/repository
+      - ./pkg/service:/go/pkg/service
+      - ./server.go:/go/server.go
+      - ./snippets.go:/go/snippets.go
+      - ./users.go:/go/users.go
+    ports:
+      - 8001:8000
+    depends_on:
+      - db
+    env_file:
+      - .env
+
+  db:
+    container_name: postgres
+    restart: always
+    image: postgres:latest
+    volumes:
+      - ./.database/postgres/data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    ports:
+      - 5436:5432
