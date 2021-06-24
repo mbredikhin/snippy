@@ -1,11 +1,11 @@
-# Snippets
+# Snippy
 
 A RESTful API example for snippets app with GO
 
 ## Installation and run
 ```sh
-go get github.com/mbredikhin/snippets
-cd snippets
+go get github.com/mbredikhin/snippy
+cd snippy
 # Build services
 make build
 # Create and start containers
