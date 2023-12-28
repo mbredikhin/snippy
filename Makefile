@@ -2,16 +2,13 @@ watch:
 	air -c .air.conf
 
 build:
-	docker-compose build app
+	docker-compose build
 
 run:
-	docker-compose up app
+	docker-compose up -d
 
 test:
 	go test -v ./...
 
 migrate:
-	migrate -path ./schema -database 'postgres://postgres:qwerty@0.0.0.0:5436/postgres?sslmode=disable' up
-
-swag:
-	swag init -g cmd/main.go
+	docker-compose run --rm app migrate -path ./schema -database 'postgres://postgres:qwerty@postgres:5432/postgres?sslmode=disable' up

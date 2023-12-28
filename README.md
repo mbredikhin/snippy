@@ -15,7 +15,138 @@ make migrate
 # API Endpoint: http://127.0.0.1:8001
 ```
 
-## API
+## API Reference
+
+#### Register new user
+
+```http
+  POST /auth/sign-up
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `username` | `string` | **Required**. Your username |
+| `password` | `string` | **Required**. Your password |
+| `name` | `string` | Your full name |
+
+Response
+```
+{
+    "id": number
+}
+```
+
+#### Login with username and password
+
+```http
+  POST /auth/sign-in
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `username` | `string` | **Required**. Your username |
+| `password` | `string` | **Required**. Your password |
+
+Response
+```
+{
+    "token": string
+}
+```
+
+#### Create a new list of snippets
+
+```http
+  POST /api/lists
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `name` | `string` | **Required**. Collection name |
+
+Response 
+```
+{
+    "id": number
+}
+```
+
+#### Get all lists
+
+```http
+  GET /api/lists
+```
+
+Response 
+```
+{
+    "data": [
+        {
+            "id": number,
+            "user_id": string,
+            "name": string
+        }
+    ]
+}
+```
+
+#### Get list by id
+
+```http
+  GET /api/lists/${id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `number` | **Required**. Collection id |
+
+Response 
+```
+{
+    "id": number,
+    "user_id": string,
+    "name": string
+}
+```
+
+#### Update list
+
+```http
+  PUT /api/lists/${id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `number` | **Required**. Collection id |
+| `user_id` | `string` | **Required**. Collection owner id |
+| `name` | `string` | **Required**. Collection name |
+
+Response 
+```
+{
+    "id": number,
+    "user_id": string,
+    "name": string
+}
+```
+
+#### Delete list
+
+```http
+  PUT /api/lists/${id}
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `id` | `number` | **Required**. Collection id |
+
+Response 
+```
+{
+    "id": number
+}
+```
+
 
 #### /auth/sign-up
 * `POST` : Register a new user
