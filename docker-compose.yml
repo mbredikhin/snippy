@@ -12,6 +12,7 @@ services:
       - ./server.go:/go/server.go
       - ./snippets.go:/go/snippets.go
       - ./users.go:/go/users.go
+      - ./schema:/go/schema
     ports:
       - 8001:8000
     depends_on:
