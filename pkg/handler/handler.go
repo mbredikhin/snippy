@@ -60,10 +60,10 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			tags.PUT("/:id", h.updateTag)
 			tags.DELETE("/:id", h.deleteTag)
 		}
-		syntaxes := api.Group("syntaxes")
+		languages := api.Group("languages")
 		{
-			syntaxes.POST("/", h.addSyntax)
-			syntaxes.GET("/", h.getSyntaxList)
+			languages.POST("/", h.addLanguage)
+			languages.GET("/", h.getLanguages)
 		}
 	}
 

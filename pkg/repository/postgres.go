@@ -13,7 +13,7 @@ const (
 	tagsTable              = "tags"
 	favouriteSnippetsTable = "favourite_snippets"
 	snippetsTagsTable      = "snippets_tags"
-	syntaxTable            = "syntax"
+	languagesTable         = "languages"
 )
 
 // Config db

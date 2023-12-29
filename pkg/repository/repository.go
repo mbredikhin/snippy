@@ -45,10 +45,10 @@ type FavouriteSnippet interface {
 	Delete(userID, snippetID int) error
 }
 
-// Syntax repo entity interface
-type Syntax interface {
-	GetAll() ([]snippets.Syntax, error)
-	Create(snippets.Syntax) (int, error)
+// Language repo entity interface
+type Language interface {
+	GetAll() ([]snippets.Language, error)
+	Create(snippets.Language) (int, error)
 }
 
 // SnippetTag relation interface
@@ -65,7 +65,7 @@ type Repository struct {
 	List
 	Tag
 	FavouriteSnippet
-	Syntax
+	Language
 	SnippetTag
 }
 
@@ -77,7 +77,7 @@ func NewRepository(db *sqlx.DB) *Repository {
 		Snippet:          NewSnippetPostgres(db),
 		Tag:              NewTagPostgres(db),
 		FavouriteSnippet: NewFavouriteSnippetPostgres(db),
-		Syntax:           NewSyntaxPostgres(db),
+		Language:         NewLanguagePostgres(db),
 		SnippetTag:       NewSnippetTagPostgres(db),
 	}
 }

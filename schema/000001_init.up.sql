@@ -5,7 +5,7 @@ CREATE TABLE users (
   password_hash varchar(255) NOT NULL UNIQUE
 );
 
-CREATE TABLE syntax (
+CREATE TABLE languages (
   id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name varchar(255) NOT NULL
 );
@@ -20,7 +20,7 @@ CREATE TABLE snippets (
   id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   list_id int REFERENCES lists (id) ON DELETE CASCADE NOT NULL,
   name varchar(255) NOT NULL,
-  syntax_id int NOT NULL REFERENCES syntax (id),
+  language_id int NOT NULL REFERENCES languages (id),
   content text
 );
 

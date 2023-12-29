@@ -24,24 +24,24 @@ func (i UpdateListInput) Validate() error {
 
 // Snippet model
 type Snippet struct {
-	ID       int    `json:"id" db:"id"`
-	ListID   int    `json:"list_id" db:"list_id"`
-	Name     string `json:"name" db:"name" binding:"required"`
-	SyntaxID int    `json:"syntax_id" db:"syntax_id" binding:"required"`
-	Content  string `json:"content" db:"content"`
+	ID         int    `json:"id" db:"id"`
+	ListID     int    `json:"list_id" db:"list_id"`
+	Name       string `json:"name" db:"name" binding:"required"`
+	LanguageID int    `json:"language_id" db:"language_id" binding:"required"`
+	Content    string `json:"content" db:"content"`
 }
 
 // UpdateSnippetInput model
 type UpdateSnippetInput struct {
-	Name     *string `json:"name"`
-	ListID   *int    `json:"list_id"`
-	SyntaxID *int    `json:"syntax_id"`
-	Content  *string `json:"content"`
+	Name       *string `json:"name"`
+	ListID     *int    `json:"list_id"`
+	LanguageID *int    `json:"language_id"`
+	Content    *string `json:"content"`
 }
 
 // Validate - snippet input validation
 func (i UpdateSnippetInput) Validate() error {
-	if i.Name == nil && i.ListID == nil && i.SyntaxID == nil && i.Content == nil {
+	if i.Name == nil && i.ListID == nil && i.LanguageID == nil && i.Content == nil {
 		return errors.New("update struture has no values")
 	}
 	return nil
@@ -67,8 +67,8 @@ func (i UpdateTagInput) Validate() error {
 	return nil
 }
 
-// Syntax model
-type Syntax struct {
+// Language model
+type Language struct {
 	ID   int    `json:"id" db:"id"`
 	Name string `json:"name" db:"name" binding:"required"`
 }

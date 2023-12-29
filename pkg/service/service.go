@@ -34,8 +34,8 @@ type Snippet interface {
 	AddTag(userID, snippetID, tagID int) error
 	RemoveTag(userID, snippetID, tagID int) error
 	GetTagIDs(userID, snippetID int) ([]int, error)
-	GetSyntaxList() ([]snippets.Syntax, error)
-	CreateSyntax(snippets.Syntax) (int, error)
+	GetLanguages() ([]snippets.Language, error)
+	CreateLanguage(snippets.Language) (int, error)
 }
 
 // Tag service interface
@@ -60,7 +60,7 @@ func NewService(repos *repository.Repository) *Service {
 	return &Service{
 		Authorization: NewAuthService(repos.Authorization),
 		List:          NewListService(repos.List),
-		Snippet:       NewSnippetService(repos.Snippet, repos.SnippetTag, repos.FavouriteSnippet, repos.Syntax),
+		Snippet:       NewSnippetService(repos.Snippet, repos.SnippetTag, repos.FavouriteSnippet, repos.Language),
 		Tag:           NewTagService(repos.Tag, repos.SnippetTag),
 	}
 }

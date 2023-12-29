@@ -10,7 +10,7 @@ type SnippetService struct {
 	snippetRepo          repository.Snippet
 	snippetTagRepo       repository.SnippetTag
 	favouriteSnippetRepo repository.FavouriteSnippet
-	syntaxRepo           repository.Syntax
+	languageRepo         repository.Language
 }
 
 // NewSnippetService - Snippet service constructor
@@ -18,8 +18,8 @@ func NewSnippetService(
 	snippetRepo repository.Snippet,
 	snippetTagRepo repository.SnippetTag,
 	favouriteSnippetRepo repository.FavouriteSnippet,
-	syntaxRepo repository.Syntax) *SnippetService {
-	return &SnippetService{snippetRepo, snippetTagRepo, favouriteSnippetRepo, syntaxRepo}
+	languageRepo repository.Language) *SnippetService {
+	return &SnippetService{snippetRepo, snippetTagRepo, favouriteSnippetRepo, languageRepo}
 }
 
 // Create - Create new snippet
@@ -77,12 +77,12 @@ func (s *SnippetService) GetTagIDs(userID, snippetID int) ([]int, error) {
 	return s.snippetTagRepo.GetTagIDs(userID, snippetID)
 }
 
-// GetSyntaxList - Get syntax list
-func (s *SnippetService) GetSyntaxList() ([]snippets.Syntax, error) {
-	return s.syntaxRepo.GetAll()
+// GetLanguages - Get list of languages
+func (s *SnippetService) GetLanguages() ([]snippets.Language, error) {
+	return s.languageRepo.GetAll()
 }
 
-// CreateSyntax - Create new syntax
-func (s *SnippetService) CreateSyntax(syntax snippets.Syntax) (int, error) {
-	return s.syntaxRepo.Create(syntax)
+// CreateLanguage - Create new language
+func (s *SnippetService) CreateLanguage(language snippets.Language) (int, error) {
+	return s.languageRepo.Create(language)
 }

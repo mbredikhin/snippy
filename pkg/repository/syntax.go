@@ -7,29 +7,29 @@ import (
 	"github.com/mbredikhin/snippets"
 )
 
-// SyntaxPostgres structure
-type SyntaxPostgres struct {
+// LanguagePostgres structure
+type LanguagePostgres struct {
 	db *sqlx.DB
 }
 
-// NewSyntaxPostgres - SyntaxPostgres constructor
-func NewSyntaxPostgres(db *sqlx.DB) *SyntaxPostgres {
-	return &SyntaxPostgres{db: db}
+// NewLanguagePostgres - LanguagePostgres constructor
+func NewLanguagePostgres(db *sqlx.DB) *LanguagePostgres {
+	return &LanguagePostgres{db: db}
 }
 
-// GetAll - get list of syntaxes
-func (r *SyntaxPostgres) GetAll() ([]snippets.Syntax, error) {
-	var syntaxList []snippets.Syntax
-	query := fmt.Sprintf("SELECT id, name FROM %s", syntaxTable)
-	err := r.db.Select(&syntaxList, query)
-	return syntaxList, err
+// GetAll - get list of languages
+func (r *LanguagePostgres) GetAll() ([]snippets.Language, error) {
+	var languages []snippets.Language
+	query := fmt.Sprintf("SELECT id, name FROM %s", languagesTable)
+	err := r.db.Select(&languages, query)
+	return languages, err
 }
 
-// Create - create syntax
-func (r *SyntaxPostgres) Create(syntax snippets.Syntax) (int, error) {
+// Create - create language
+func (r *LanguagePostgres) Create(language snippets.Language) (int, error) {
 	var id int
-	query := fmt.Sprintf("INSERT INTO %s (name) VALUES ($1) RETURNING id", syntaxTable)
-	row := r.db.QueryRow(query, syntax.Name)
+	query := fmt.Sprintf("INSERT INTO %s (name) VALUES ($1) RETURNING id", languagesTable)
+	row := r.db.QueryRow(query, language.Name)
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}
