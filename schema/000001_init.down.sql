@@ -1,14 +1,14 @@
 
-DROP TABLE lists;
+DROP TABLE lists CASCADE;
 
-DROP TABLE snippets;
+DROP TABLE snippets CASCADE;
 
-DROP TABLE favourite_snippets;
+DROP TABLE favourite_snippets CASCADE;
 
-DROP TABLE tags;
+DROP TABLE tags CASCADE;
 
-DROP TABLE languages;
+DROP TABLE languages CASCADE;
 
-DROP TABLE snippets_tags;
+DROP TABLE snippets_tags CASCADE;
 
-DROP TABLE users;
+DROP TABLE users CASCADE;
