@@ -16,7 +16,7 @@ func NewListService(repo repository.List) *ListService {
 }
 
 // Create - Create new list
-func (l *ListService) Create(userID int, list snippets.List) (int, error) {
+func (l *ListService) Create(userID int, list snippets.List) (snippets.List, error) {
 	return l.repo.Create(userID, list)
 }
 
@@ -36,6 +36,6 @@ func (l *ListService) Delete(userID int, listID int) error {
 }
 
 // Update - Edit list
-func (l *ListService) Update(userID int, listID int, input snippets.UpdateListInput) error {
+func (l *ListService) Update(userID int, listID int, input snippets.UpdateListInput) (snippets.List, error) {
 	return l.repo.Update(userID, listID, input)
 }

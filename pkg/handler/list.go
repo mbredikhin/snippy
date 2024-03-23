@@ -21,13 +21,13 @@ func (h *Handler) createList(c *gin.Context) {
 		return
 	}
 
-	id, err := h.services.List.Create(userID, list)
+	list, err = h.services.List.Create(userID, list)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{}{"id": id})
+	c.JSON(http.StatusOK, map[string]snippets.List{"data": list})
 }
 
 func (h *Handler) getAllLists(c *gin.Context) {
@@ -64,7 +64,7 @@ func (h *Handler) getList(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, list)
+	c.JSON(http.StatusOK, map[string]snippets.List{"data": list})
 }
 
 func (h *Handler) updateList(c *gin.Context) {
@@ -83,13 +83,14 @@ func (h *Handler) updateList(c *gin.Context) {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	err = h.services.List.Update(userID, listID, input)
+	var list snippets.List
+	list, err = h.services.List.Update(userID, listID, input)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, statusResponse{"ok"})
+	c.JSON(http.StatusOK, map[string]snippets.List{"data": list})
 }
 
 func (h *Handler) deleteList(c *gin.Context) {
@@ -109,6 +110,8 @@ func (h *Handler) deleteList(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	c.JSON(http.StatusOK, statusResponse{"ok"})
+	response := map[string]int{
+		"id": listID,
+	}
+	c.JSON(http.StatusOK, response)
 }

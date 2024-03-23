@@ -18,14 +18,13 @@ func NewListPostgres(db *sqlx.DB) *ListPostgres {
 }
 
 // Create - create new list
-func (r *ListPostgres) Create(userID int, list snippets.List) (int, error) {
-	var id int
+func (r *ListPostgres) Create(userID int, list snippets.List) (snippets.List, error) {
 	query := fmt.Sprintf("INSERT INTO %s (user_id, name) VALUES ($1, $2) RETURNING id", listsTable)
 	row := r.db.QueryRow(query, userID, list.Name)
-	if err := row.Scan(&id); err != nil {
-		return 0, err
+	if err := row.Scan(&list.ID); err != nil {
+		return list, err
 	}
-	return id, nil
+	return list, nil
 }
 
 // GetAll - get all lists
@@ -52,8 +51,9 @@ func (r *ListPostgres) Delete(userID int, listID int) error {
 }
 
 // Update - update list
-func (r *ListPostgres) Update(userID int, listID int, input snippets.UpdateListInput) error {
+func (r *ListPostgres) Update(userID int, listID int, input snippets.UpdateListInput) (snippets.List, error) {
 	query := fmt.Sprintf("UPDATE %s t SET name=$1 WHERE t.id=$2 AND t.user_id=$3", listsTable)
 	_, err := r.db.Exec(query, input.Name, listID, userID)
-	return err
+	list := snippets.List{ID: listID, UserID: userID, Name: *input.Name}
+	return list, err
 }

@@ -14,11 +14,11 @@ type Authorization interface {
 
 // List service interface
 type List interface {
-	Create(userID int, list snippets.List) (int, error)
+	Create(userID int, list snippets.List) (snippets.List, error)
 	GetAll(userID int) ([]snippets.List, error)
 	GetByID(userID int, listID int) (snippets.List, error)
 	Delete(userID int, listID int) error
-	Update(userID int, listID int, input snippets.UpdateListInput) error
+	Update(userID int, listID int, input snippets.UpdateListInput) (snippets.List, error)
 }
 
 // Snippet service interface

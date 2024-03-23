@@ -57,6 +57,8 @@ Response
 }
 ```
 
+Send given token in Authorization HTTP header – `Authorization: "Bearer %s" `
+
 #### Create a new list of snippets
 
 ```http
@@ -71,7 +73,11 @@ Response
 
 ```
 {
-    "id": number
+    "data": {
+        "id": number,
+        "user_id": string,
+        "name": string
+    }
 }
 ```
 
@@ -91,7 +97,7 @@ Response
             "user_id": string,
             "name": string
         }
-    ]
+    ] | null
 }
 ```
 
@@ -109,9 +115,11 @@ Response
 
 ```
 {
-    "id": number,
-    "user_id": string,
-    "name": string
+    "data": {
+        "id": number,
+        "user_id": string,
+        "name": string
+    }
 }
 ```
 
@@ -121,26 +129,26 @@ Response
   PUT /api/lists/${id}
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `number` | **Required**. Collection id       |
-| `user_id` | `string` | **Required**. Collection owner id |
-| `name`    | `string` | **Required**. Collection name     |
+| Parameter | Type     | Description                   |
+| :-------- | :------- | :---------------------------- |
+| `name`    | `string` | **Required**. Collection name |
 
 Response
 
 ```
 {
-    "id": number,
-    "user_id": string,
-    "name": string
+    "data": {
+        "id": number,
+        "user_id": string,
+        "name": string
+    }
 }
 ```
 
 #### Delete list
 
 ```http
-  PUT /api/lists/${id}
+  DELETE /api/lists/${id}
 ```
 
 | Parameter | Type     | Description                 |
@@ -154,25 +162,6 @@ Response
     "id": number
 }
 ```
-
-#### /auth/sign-up
-
-- `POST` : Register a new user
-
-#### /auth/sign-in
-
-- `POST` : Login with username and password
-
-#### /api/lists
-
-- `POST` : Create a new list of snippets
-- `GET` : Get all lists
-
-#### /api/lists/:id
-
-- `GET` : Get list
-- `PUT` : Update list
-- `DELETE` : Delete list
 
 #### /api/lists/:id/snippets
 

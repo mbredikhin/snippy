@@ -5,7 +5,7 @@ import "errors"
 // List of snippets model
 type List struct {
 	ID     int    `json:"id" db:"id"`
-	UserID string `json:"user_id" db:"user_id"`
+	UserID int    `json:"user_id" db:"user_id"`
 	Name   string `json:"name" db:"name" binding:"required"`
 }
 

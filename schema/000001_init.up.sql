@@ -2,7 +2,7 @@ CREATE TABLE users (
   id int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   name varchar(255),
   username varchar(255) NOT NULL UNIQUE,
-  password_hash varchar(255) NOT NULL UNIQUE
+  password_hash varchar(255) NOT NULL
 );
 
 CREATE TABLE languages (
