@@ -163,6 +163,43 @@ Response
 }
 ```
 
+#### Add language
+
+```http
+  POST /api/languages
+```
+
+| Parameter | Type     | Description                 |
+| :-------- | :------- | :-------------------------- |
+| `name`    | `string` | **Required**. Language name |
+
+Response
+
+```
+{
+    "id": number
+}
+```
+
+#### Get list of languages
+
+```http
+  GET /api/languages
+```
+
+Response
+
+```
+{
+    "data": [
+      {
+          "id": number,
+          "name": string
+      } | null
+    ]
+}
+```
+
 #### /api/lists/:id/snippets
 
 - `POST` : Create new snippet in a list
@@ -193,7 +230,3 @@ Response
 - `GET` : Get tag
 - `PUT` : Update tag
 - `DELETE` : Delete tag
-
-#### /api/languages
-
-- `GET` : Get list of languages

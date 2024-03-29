@@ -62,8 +62,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		}
 		languages := api.Group("languages")
 		{
-			languages.POST("/", h.addLanguage)
-			languages.GET("/", h.getLanguages)
+			languages.POST("", h.addLanguage)
+			languages.GET("", h.getLanguages)
 		}
 	}
 
