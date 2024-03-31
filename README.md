@@ -226,12 +226,6 @@ Response
   GET /api/lists/{list_id}/snippets
 ```
 
-| Parameter     | Type     | Description                   |
-| :------------ | :------- | :---------------------------- |
-| `name`        | `string` | **Required**. Snippet name    |
-| `language_id` | `number` | **Required**. Language ID     |
-| `content`     | `string` | **Required**. Snippet content |
-
 Response
 
 ```
@@ -246,11 +240,58 @@ Response
 }
 ```
 
-#### /api/snippets/:id
+#### Get snippet
 
-- `GET` : Get snippet
-- `PUT` : Update snippet
-- `DELETE` : Delete snippet
+```http
+  GET /api/snippets/{id}
+```
+
+Response
+
+```
+{
+    "id": number,
+    "name": string,
+    "content": string,
+    "language_id": number,
+    "list_id": number
+}
+```
+
+#### Update snippet
+
+```http
+  PUT /api/snippets/{id}
+```
+
+| Parameter     | Type     | Description                   |
+| :------------ | :------- | :---------------------------- |
+| `name`        | `string` | **Required**. Snippet name    |
+| `language_id` | `number` | **Required**. Language ID     |
+| `list_id`     | `number` | **Required**. Collection ID   |
+| `content`     | `string` | **Required**. Snippet content |
+
+Response
+
+```
+{
+    "status": "ok"
+}
+```
+
+#### Delete snippet
+
+```http
+  DELETE /api/snippets/{id}
+```
+
+Response
+
+```
+{
+    "status": "ok"
+}
+```
 
 #### /api/favourite-snippets
 
