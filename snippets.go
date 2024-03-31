@@ -1,6 +1,8 @@
 package snippets
 
-import "errors"
+import (
+	"errors"
+)
 
 // List of snippets model
 type List struct {
@@ -28,7 +30,7 @@ type Snippet struct {
 	ListID     int    `json:"list_id" db:"list_id"`
 	Name       string `json:"name" db:"name" binding:"required"`
 	LanguageID int    `json:"language_id" db:"language_id" binding:"required"`
-	Content    string `json:"content" db:"content"`
+	Content    string `json:"content" db:"content" binding:"required"`
 }
 
 // UpdateSnippetInput model

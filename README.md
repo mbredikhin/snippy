@@ -104,7 +104,7 @@ Response
 #### Get list by id
 
 ```http
-  GET /api/lists/${id}
+  GET /api/lists/{id}
 ```
 
 | Parameter | Type     | Description                 |
@@ -126,7 +126,7 @@ Response
 #### Update list
 
 ```http
-  PUT /api/lists/${id}
+  PUT /api/lists/{id}
 ```
 
 | Parameter | Type     | Description                   |
@@ -148,7 +148,7 @@ Response
 #### Delete list
 
 ```http
-  DELETE /api/lists/${id}
+  DELETE /api/lists/{id}
 ```
 
 | Parameter | Type     | Description                 |
@@ -200,10 +200,51 @@ Response
 }
 ```
 
-#### /api/lists/:id/snippets
+#### Add new snippet
 
-- `POST` : Create new snippet in a list
-- `GET` : Get snippets from a list
+```http
+  POST /api/lists/{list_id}/snippets
+```
+
+| Parameter     | Type     | Description                   |
+| :------------ | :------- | :---------------------------- |
+| `name`        | `string` | **Required**. Snippet name    |
+| `language_id` | `number` | **Required**. Language ID     |
+| `content`     | `string` | **Required**. Snippet content |
+
+Response
+
+```
+{
+    "id": number
+}
+```
+
+#### Get all snippets of a list
+
+```http
+  GET /api/lists/{list_id}/snippets
+```
+
+| Parameter     | Type     | Description                   |
+| :------------ | :------- | :---------------------------- |
+| `name`        | `string` | **Required**. Snippet name    |
+| `language_id` | `number` | **Required**. Language ID     |
+| `content`     | `string` | **Required**. Snippet content |
+
+Response
+
+```
+{
+    "data": [
+        {
+            "id": number,
+            "name": string,
+            "user_id": number
+        }
+    ] | null
+}
+```
 
 #### /api/snippets/:id
 

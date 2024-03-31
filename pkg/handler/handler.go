@@ -36,8 +36,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			lists.DELETE("/:id", h.deleteList)
 			snippets := lists.Group(":id/snippets")
 			{
-				snippets.POST("/", h.createSnippet)
-				snippets.GET("/", h.getAllSnippets)
+				snippets.POST("", h.createSnippet)
+				snippets.GET("", h.getAllSnippets)
 			}
 		}
 		snippets := api.Group("snippets")
