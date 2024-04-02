@@ -25,7 +25,7 @@ CREATE TABLE snippets (
 );
 
 CREATE TABLE favourite_snippets (
-  snippet_id int REFERENCES snippets (id) NOT NULL,
+  snippet_id int REFERENCES snippets (id) NOT NULL PRIMARY KEY,
   user_id int REFERENCES users (id) NOT NULL
 );
 

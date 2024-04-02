@@ -131,12 +131,12 @@ func (h *Handler) addFavouriteSnippet(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	snippetID, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid snippet id parameter")
+	var input snippets.AddFavouriteSnippetInput
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	if err := h.services.Snippet.AddFavourite(userID, snippetID); err != nil {
+	if err := h.services.Snippet.AddFavourite(userID, *input.ID); err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}

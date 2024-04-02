@@ -48,8 +48,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		}
 		favouriteSnippets := api.Group("/favourite-snippets")
 		{
-			favouriteSnippets.GET("/", h.getFavouriteSnippets)
-			favouriteSnippets.POST("/:id", h.addFavouriteSnippet)
+			favouriteSnippets.GET("", h.getFavouriteSnippets)
+			favouriteSnippets.POST("", h.addFavouriteSnippet)
 			favouriteSnippets.DELETE("/:id", h.removeFavouriteSnippet)
 		}
 		tags := api.Group("tags")

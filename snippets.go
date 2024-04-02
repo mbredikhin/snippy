@@ -41,6 +41,11 @@ type UpdateSnippetInput struct {
 	Content    *string `json:"content"`
 }
 
+// AddFavouriteSnippetInput model
+type AddFavouriteSnippetInput struct {
+	ID *int `json:"id"`
+}
+
 // Validate - snippet input validation
 func (i UpdateSnippetInput) Validate() error {
 	if i.Name == nil && i.ListID == nil && i.LanguageID == nil && i.Content == nil {
