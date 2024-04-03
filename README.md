@@ -1,6 +1,6 @@
 # Snippy
 
-A RESTful API example for snippets app with GO
+Backend of the Snippy service - lightning-fast solution for managing code snippets.
 
 ## Installation and run
 
@@ -109,7 +109,7 @@ Response
 
 | Parameter | Type     | Description                 |
 | :-------- | :------- | :-------------------------- |
-| `id`      | `number` | **Required**. Collection id |
+| `id`      | `number` | **Required**. Collection ID |
 
 Response
 
@@ -153,7 +153,7 @@ Response
 
 | Parameter | Type     | Description                 |
 | :-------- | :------- | :-------------------------- |
-| `id`      | `number` | **Required**. Collection id |
+| `id`      | `number` | **Required**. Collection ID |
 
 Response
 
@@ -375,8 +375,50 @@ Response
 ]
 ```
 
-#### /api/tags/:id
+#### Get tag
 
-- `GET` : Get tag
-- `PUT` : Update tag
-- `DELETE` : Delete tag
+```http
+  GET /api/tags/{id}
+```
+
+Response
+
+```
+{
+    "id": number,
+    "name": string,
+    "user_id": number
+}
+```
+
+#### Update tag
+
+```http
+  PUT /api/tags/{id}
+```
+
+| Parameter | Type     | Description          |
+| :-------- | :------- | :------------------- |
+| `id`      | `number` | **Required**. Tag ID |
+
+Response
+
+```
+{
+    "status": "ok"
+}
+```
+
+#### Delete tag
+
+```http
+  DELETE /api/tags/{id}
+```
+
+Response
+
+```
+{
+    "status": "ok"
+}
+```
