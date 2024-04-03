@@ -339,10 +339,41 @@ Response
 }
 ```
 
-#### /api/tags
+#### Add tag
 
-- `POST` : Create new tag
-- `GET` : Get tags
+```http
+  POST /api/tags
+```
+
+| Parameter | Type     | Description          |
+| :-------- | :------- | :------------------- |
+| `name`    | `string` | **Required**. Tag ID |
+
+Response
+
+```
+{
+    "id": number
+}
+```
+
+#### Get list of tags
+
+```http
+  GET /api/tags
+```
+
+Response
+
+```
+[
+    {
+        "id": number,
+        "name": string,
+        "user_id": number
+    } | null
+]
+```
 
 #### /api/tags/:id
 

@@ -54,8 +54,8 @@ func (h *Handler) InitRoutes() *gin.Engine {
 		}
 		tags := api.Group("tags")
 		{
-			tags.POST("/", h.createTag)
-			tags.GET("/", h.getAllTags)
+			tags.POST("", h.createTag)
+			tags.GET("", h.getAllTags)
 			tags.GET("/:id", h.getTag)
 			tags.PUT("/:id", h.updateTag)
 			tags.DELETE("/:id", h.deleteTag)
