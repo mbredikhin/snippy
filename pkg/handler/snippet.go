@@ -160,3 +160,70 @@ func (h *Handler) removeFavouriteSnippet(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, statusResponse{"ok"})
 }
+
+func (h *Handler) getSnippetTags(c *gin.Context) {
+	userID, err := getUserID(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	snippetID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "Invalid snippet id parameter")
+		return
+	}
+	tagIDs, err := h.services.Snippet.GetTagIDs(userID, snippetID)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"data": tagIDs,
+	})
+}
+
+func (h *Handler) addTagToSnippet(c *gin.Context) {
+	userID, err := getUserID(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	snippetID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "Invalid snippet id parameter")
+		return
+	}
+	var input snippets.AddTagToSnippetInput
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	if err := h.services.Snippet.AddTag(userID, snippetID, *input.TagID); err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, statusResponse{"ok"})
+}
+
+func (h *Handler) removeTagFromSnippet(c *gin.Context) {
+	userID, err := getUserID(c)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	snippetID, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "Invalid snippet id parameter")
+		return
+	}
+	var input snippets.RemoveTagFromSnippetInput
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
+		return
+	}
+	if err := h.services.Snippet.RemoveTag(userID, snippetID, *input.TagID); err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	c.JSON(http.StatusOK, statusResponse{"ok"})
+}

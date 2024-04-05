@@ -79,3 +79,13 @@ type Language struct {
 	ID   int    `json:"id" db:"id"`
 	Name string `json:"name" db:"name" binding:"required"`
 }
+
+// AddTagToSnippetInput model
+type AddTagToSnippetInput struct {
+	TagID *int `json:"tag_id"`
+}
+
+// RemoveTagFromSnippetInput model
+type RemoveTagFromSnippetInput struct {
+	TagID *int `json:"tag_id"`
+}

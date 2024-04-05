@@ -45,6 +45,12 @@ func (h *Handler) InitRoutes() *gin.Engine {
 			snippets.GET("/:id", h.getSnippet)
 			snippets.PUT("/:id", h.updateSnippet)
 			snippets.DELETE("/:id", h.deleteSnippet)
+			snippetsTags := snippets.Group(":id/tags")
+			{
+				snippetsTags.GET("", h.getSnippetTags)
+				snippetsTags.POST("", h.addTagToSnippet)
+				snippetsTags.DELETE("", h.removeTagFromSnippet)
+			}
 		}
 		favouriteSnippets := api.Group("/favourite-snippets")
 		{
