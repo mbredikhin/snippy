@@ -18,12 +18,17 @@ func NewSnippetTagPostgres(db *sqlx.DB) *SnippetTagPostgres {
 
 // Create - create snippets to tags relation entry
 func (r *SnippetTagPostgres) Create(userID, snippetID, tagID int) error {
-	query := fmt.Sprintf(`INSERT INTO %s stt 
-	SELECT st.id AS snippet_id, tt.id AS tag_id FROM $s st
+	query := fmt.Sprintf(`INSERT INTO %s
+	SELECT st.id AS snippet_id, tt.id AS tag_id FROM %s st
 	JOIN %s lt ON st.list_id = lt.id
 	JOIN %s ut ON lt.user_id = ut.id
 	JOIN %s tt ON tt.user_id = ut.id
-	WHERE ut.id = $1 AND st.id = $2 AND tt.id = $3`, snippetsTagsTable, listsTable, usersTable, tagsTable)
+	WHERE ut.id = $1 
+		AND st.id = $2 
+		AND tt.id = $3 
+		AND NOT EXISTS 
+			(SELECT snippet_id, tag_id FROM %s stt WHERE stt.snippet_id = $2 AND stt.tag_id = $3)
+	`, snippetsTagsTable, snippetsTable, listsTable, usersTable, tagsTable, snippetsTagsTable)
 	_, err := r.db.Exec(query, userID, snippetID, tagID)
 	return err
 }
