@@ -422,3 +422,53 @@ Response
     "status": "ok"
 }
 ```
+
+#### Get list of snippet tags
+
+```http
+  GET /api/snippets/{snippet_id}/tags
+```
+
+Response
+
+```
+{
+    "data": [number] | null
+}
+```
+
+#### Add tag to snippet
+
+```http
+  POST /api/snippets/{snippet_id}/tags
+```
+
+| Parameter | Type     | Description          |
+| :-------- | :------- | :------------------- |
+| `tag_id`  | `number` | **Required**. Tag ID |
+
+Response
+
+```
+{
+    "status": "ok"
+}
+```
+
+#### Unassign tag from snippet
+
+```http
+  DELETE /api/snippets/{snippet_id}/tags
+```
+
+| Parameter | Type     | Description          |
+| :-------- | :------- | :------------------- |
+| `tag_id`  | `number` | **Required**. Tag ID |
+
+Response
+
+```
+{
+    "status": "ok"
+}
+```
