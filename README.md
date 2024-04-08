@@ -12,8 +12,12 @@ make build
 # Create and start containers
 make run
 # Run database migrations
-make migrate
-# API Endpoint: http://127.0.0.1:8001
+make migrate-up
+# Seed database
+make db-seed
+# API host name: http://localhost:8001
+# curl -X POST --data '{"username":"username", "password":"password"}' http://localhost:8001/auth/sign-in
+# curl -X POST --data '{"name":"My snippets collection"}' --header 'Authorization: Bearer {{token}}' http://localhost:8001/api/lists
 ```
 
 ## API Reference
@@ -437,7 +441,7 @@ Response
 }
 ```
 
-#### Add tag to snippet
+#### Assign tag to snippet
 
 ```http
   POST /api/snippets/{snippet_id}/tags

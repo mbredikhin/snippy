@@ -27,6 +27,7 @@ services:
     image: postgres:latest
     volumes:
       - ./.database/postgres/data:/var/lib/postgresql/data
+      - ./schema/seed.sql:/schema/seed.sql
     env_file:
       - .env
     ports:
