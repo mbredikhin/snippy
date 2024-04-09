@@ -5,8 +5,7 @@ Backend of the Snippy service - lightning-fast solution for managing code snippe
 ## Installation and run
 
 ```sh
-go get github.com/mbredikhin/snippy
-cd snippy
+git clone git@github.com:mbredikhin/snippy.git && cd snippy
 # Build services
 make build
 # Create and start containers
