@@ -21,6 +21,8 @@ make db-seed
 
 ## API Reference
 
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://god.gw.postman.com/run-collection/12758470-78ec42b6-b8e1-4935-ba76-d7e701cf4f37?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D12758470-78ec42b6-b8e1-4935-ba76-d7e701cf4f37%26entityType%3Dcollection%26workspaceId%3D26ed6946-1a78-42a3-a05e-6b50744b4675)
+
 #### Register new user
 
 ```http
