@@ -33,6 +33,11 @@ type Snippet struct {
 	Content    string `json:"content" db:"content" binding:"required"`
 }
 
+// CreateSnippetRespnse model
+type CreateSnippetResponse struct {
+	ID *int `json:"id"`
+}
+
 // UpdateSnippetInput model
 type UpdateSnippetInput struct {
 	Name       *string `json:"name"`

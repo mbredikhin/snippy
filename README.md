@@ -109,7 +109,7 @@ Response
 #### Get list by id
 
 ```http
-  GET /api/lists/{id}
+  GET /api/lists/:id
 ```
 
 | Parameter | Type     | Description                 |
@@ -131,7 +131,7 @@ Response
 #### Update list
 
 ```http
-  PUT /api/lists/{id}
+  PUT /api/lists/:id
 ```
 
 | Parameter | Type     | Description                   |
@@ -153,7 +153,7 @@ Response
 #### Delete list
 
 ```http
-  DELETE /api/lists/{id}
+  DELETE /api/lists/:id
 ```
 
 | Parameter | Type     | Description                 |
@@ -205,10 +205,10 @@ Response
 }
 ```
 
-#### Add new snippet
+#### Create new snippet
 
 ```http
-  POST /api/lists/{list_id}/snippets
+  POST /api/lists/:list_id/snippets
 ```
 
 | Parameter     | Type     | Description                   |
@@ -221,14 +221,16 @@ Response
 
 ```
 {
-    "id": number
+    "data": {
+        "id": number
+    }
 }
 ```
 
-#### Get all snippets of a list
+#### Get all snippets of the list
 
 ```http
-  GET /api/lists/{list_id}/snippets
+  GET /api/lists/:list_id/snippets
 ```
 
 Response
@@ -238,35 +240,39 @@ Response
     "data": [
         {
             "id": number,
+            "list_id": number,
             "name": string,
-            "user_id": number
+            "language_id": number,
+            "content": string
         }
-    ] | null
+    ]
 }
 ```
 
 #### Get snippet
 
 ```http
-  GET /api/snippets/{id}
+  GET /api/snippets/:id
 ```
 
 Response
 
 ```
 {
-    "id": number,
-    "name": string,
-    "content": string,
-    "language_id": number,
-    "list_id": number
+    "data": {
+        "id": number,
+        "list_id": number,
+        "name": string,
+        "language_id": number,
+        "content": string
+    }
 }
 ```
 
 #### Update snippet
 
 ```http
-  PUT /api/snippets/{id}
+  PUT /api/snippets/:id
 ```
 
 | Parameter     | Type     | Description                   |
@@ -287,7 +293,7 @@ Response
 #### Delete snippet
 
 ```http
-  DELETE /api/snippets/{id}
+  DELETE /api/snippets/:id
 ```
 
 Response
@@ -333,7 +339,7 @@ Response
 #### Delete snippet from favourites
 
 ```http
-  DELETE /api/favourite-snippets/{id}
+  DELETE /api/favourite-snippets/:id
 ```
 
 Response
@@ -383,7 +389,7 @@ Response
 #### Get tag
 
 ```http
-  GET /api/tags/{id}
+  GET /api/tags/:id
 ```
 
 Response
@@ -399,7 +405,7 @@ Response
 #### Update tag
 
 ```http
-  PUT /api/tags/{id}
+  PUT /api/tags/:id
 ```
 
 | Parameter | Type     | Description          |
@@ -417,7 +423,7 @@ Response
 #### Delete tag
 
 ```http
-  DELETE /api/tags/{id}
+  DELETE /api/tags/:id
 ```
 
 Response
@@ -431,7 +437,7 @@ Response
 #### Get list of snippet tags
 
 ```http
-  GET /api/snippets/{snippet_id}/tags
+  GET /api/snippets/:snippet_id/tags
 ```
 
 Response
@@ -445,7 +451,7 @@ Response
 #### Assign tag to snippet
 
 ```http
-  POST /api/snippets/{snippet_id}/tags
+  POST /api/snippets/:snippet_id/tags
 ```
 
 | Parameter | Type     | Description          |
@@ -463,7 +469,7 @@ Response
 #### Unassign tag from snippet
 
 ```http
-  DELETE /api/snippets/{snippet_id}/tags
+  DELETE /api/snippets/:snippet_id/tags
 ```
 
 | Parameter | Type     | Description          |

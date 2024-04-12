@@ -24,8 +24,8 @@ func (h *Handler) createSnippet(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+	c.JSON(http.StatusOK, response[snippets.CreateSnippetResponse]{
+		snippets.CreateSnippetResponse{ID: &id},
 	})
 }
 
@@ -40,12 +40,15 @@ func (h *Handler) getAllSnippets(c *gin.Context) {
 		newErrorResponse(c, http.StatusBadRequest, "Invalid list id parameter")
 		return
 	}
-	snippets, err := h.services.Snippet.GetAll(userID, listID)
+	data, err := h.services.Snippet.GetAll(userID, listID)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, snippets)
+
+	c.JSON(http.StatusOK, response[[]snippets.Snippet]{
+		append([]snippets.Snippet{}, data...),
+	})
 }
 
 func (h *Handler) getSnippet(c *gin.Context) {
@@ -64,7 +67,7 @@ func (h *Handler) getSnippet(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, snippet)
+	c.JSON(http.StatusOK, response[snippets.Snippet]{snippet})
 }
 
 func (h *Handler) updateSnippet(c *gin.Context) {
