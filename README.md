@@ -307,7 +307,25 @@ Response
 #### Add snippet to favourites
 
 ```http
-  POST /api/favourite-snippets
+  POST /api/snippets/favourites
+```
+
+| Parameter | Type     | Description              |
+| :-------- | :------- | :----------------------- |
+| `id`      | `number` | **Required**. Snippet ID |
+
+Response
+
+```
+{
+    "status": "ok"
+}
+```
+
+#### Remove snippet from favourites
+
+```http
+  DELETE /api/snippets/favourites
 ```
 
 | Parameter | Type     | Description              |
@@ -325,28 +343,14 @@ Response
 #### Get ids of favourite snippets
 
 ```http
-  GET /api/favourite-snippets
+  GET /api/snippets/favourites
 ```
 
 Response
 
 ```
 {
-    "data": [number] | null
-}
-```
-
-#### Delete snippet from favourites
-
-```http
-  DELETE /api/favourite-snippets/:id
-```
-
-Response
-
-```
-{
-    "status": "ok"
+    "data": [number]
 }
 ```
 

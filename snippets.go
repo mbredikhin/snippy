@@ -46,8 +46,13 @@ type UpdateSnippetInput struct {
 	Content    *string `json:"content"`
 }
 
-// AddFavouriteSnippetInput model
-type AddFavouriteSnippetInput struct {
+// AddSnippetToFavouritesInput model
+type AddSnippetToFavouritesInput struct {
+	ID *int `json:"id"`
+}
+
+// RemoveSnippetFromFavouritesInput model
+type RemoveSnippetFromFavouritesInput struct {
 	ID *int `json:"id"`
 }
 

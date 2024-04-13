@@ -123,18 +123,18 @@ func (h *Handler) getFavouriteSnippets(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data": snippetIDs,
+	c.JSON(http.StatusOK, response[[]int]{
+		append([]int{}, snippetIDs...),
 	})
 }
 
-func (h *Handler) addFavouriteSnippet(c *gin.Context) {
+func (h *Handler) addSnippetToFavourites(c *gin.Context) {
 	userID, err := getUserID(c)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	var input snippets.AddFavouriteSnippetInput
+	var input snippets.AddSnippetToFavouritesInput
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
@@ -146,18 +146,18 @@ func (h *Handler) addFavouriteSnippet(c *gin.Context) {
 	c.JSON(http.StatusOK, statusResponse{"ok"})
 }
 
-func (h *Handler) removeFavouriteSnippet(c *gin.Context) {
+func (h *Handler) removeSnippetFromFavourites(c *gin.Context) {
 	userID, err := getUserID(c)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	snippetID, err := strconv.Atoi(c.Param("id"))
-	if err != nil {
-		newErrorResponse(c, http.StatusBadRequest, "Invalid snippet id parameter")
+	var input snippets.RemoveSnippetFromFavouritesInput
+	if err := c.BindJSON(&input); err != nil {
+		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	if err := h.services.Snippet.RemoveFavourite(userID, snippetID); err != nil {
+	if err := h.services.Snippet.RemoveFavourite(userID, *input.ID); err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
