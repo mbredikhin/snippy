@@ -180,8 +180,8 @@ func (h *Handler) getSnippetTags(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data": tagIDs,
+	c.JSON(http.StatusOK, response[[]int]{
+		append([]int{}, tagIDs...),
 	})
 }
 

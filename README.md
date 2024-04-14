@@ -438,24 +438,24 @@ Response
 }
 ```
 
-#### Get list of snippet tags
+#### Get list of tags assigned to the snippet
 
 ```http
-  GET /api/snippets/:snippet_id/tags
+  GET /api/snippets/:id/tags
 ```
 
 Response
 
 ```
 {
-    "data": [number] | null
+    "data": [number]
 }
 ```
 
-#### Assign tag to snippet
+#### Assign tag to the snippet
 
 ```http
-  POST /api/snippets/:snippet_id/tags
+  POST /api/snippets/:id/tags
 ```
 
 | Parameter | Type     | Description          |
@@ -470,10 +470,10 @@ Response
 }
 ```
 
-#### Unassign tag from snippet
+#### Unassign tag from the snippet
 
 ```http
-  DELETE /api/snippets/:snippet_id/tags
+  DELETE /api/snippets/:id/tags
 ```
 
 | Parameter | Type     | Description          |
