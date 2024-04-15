@@ -13,8 +13,8 @@ func (h *Handler) getLanguages(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"data": languages,
+	c.JSON(http.StatusOK, response[[]snippets.Language]{
+		languages,
 	})
 }
 
@@ -29,7 +29,7 @@ func (h *Handler) addLanguage(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+	c.JSON(http.StatusOK, response[snippets.AddLanguageResponse]{
+		snippets.AddLanguageResponse{ID: &id},
 	})
 }

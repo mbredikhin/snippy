@@ -182,7 +182,9 @@ Response
 
 ```
 {
-    "id": number
+    "data": {
+        "id": number
+    }
 }
 ```
 
@@ -197,10 +199,10 @@ Response
 ```
 {
     "data": [
-      {
-          "id": number,
-          "name": string
-      } | null
+        {
+            "id": number,
+            "name": string
+        }
     ]
 }
 ```

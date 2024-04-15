@@ -90,6 +90,11 @@ type Language struct {
 	Name string `json:"name" db:"name" binding:"required"`
 }
 
+// AddLanguageResponse model
+type AddLanguageResponse struct {
+	ID *int `json:"id"`
+}
+
 // AddTagToSnippetInput model
 type AddTagToSnippetInput struct {
 	TagID *int `json:"tag_id"`
