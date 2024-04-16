@@ -31,7 +31,7 @@ func (r *TagPostgres) Create(userID int, tag snippets.Tag) (int, error) {
 // GetAll - get all tags
 func (r *TagPostgres) GetAll(userID int) ([]snippets.Tag, error) {
 	var tags []snippets.Tag
-	query := fmt.Sprintf("SELECT id, name, user_id FROM %s WHERE user_id=$1", tagsTable)
+	query := fmt.Sprintf("SELECT id, name FROM %s WHERE user_id=$1", tagsTable)
 	err := r.db.Select(&tags, query, userID)
 	return tags, err
 }
@@ -39,7 +39,7 @@ func (r *TagPostgres) GetAll(userID int) ([]snippets.Tag, error) {
 // GetByID - get tag by ID
 func (r *TagPostgres) GetByID(userID, tagID int) (snippets.Tag, error) {
 	var tag snippets.Tag
-	query := fmt.Sprintf("SELECT id, name, user_id FROM %s WHERE id=$1 AND user_id=$2", tagsTable)
+	query := fmt.Sprintf("SELECT id, name FROM %s WHERE id=$1 AND user_id=$2", tagsTable)
 	err := r.db.Get(&tag, query, tagID, userID)
 	return tag, err
 }

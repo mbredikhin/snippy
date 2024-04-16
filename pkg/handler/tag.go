@@ -24,8 +24,8 @@ func (h *Handler) createTag(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
+	c.JSON(http.StatusOK, response[snippets.AddTagResponse]{
+		snippets.AddTagResponse{ID: &id},
 	})
 }
 
@@ -45,7 +45,7 @@ func (h *Handler) getTag(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, tag)
+	c.JSON(http.StatusOK, response[snippets.Tag]{tag})
 }
 
 func (h *Handler) getAllTags(c *gin.Context) {
@@ -59,7 +59,7 @@ func (h *Handler) getAllTags(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, tags)
+	c.JSON(http.StatusOK, response[[]snippets.Tag]{tags})
 }
 
 func (h *Handler) updateTag(c *gin.Context) {

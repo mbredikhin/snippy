@@ -66,14 +66,18 @@ func (i UpdateSnippetInput) Validate() error {
 
 // Tag model
 type Tag struct {
-	ID     int    `json:"id" db:"id"`
-	UserID int    `json:"user_id" db:"user_id"`
-	Name   string `json:"name" db:"name" binding:"required"`
+	ID   int    `json:"id" db:"id"`
+	Name string `json:"name" db:"name" binding:"required"`
 }
 
 // UpdateTagInput model
 type UpdateTagInput struct {
 	Name *string `json:"name"`
+}
+
+// AddTagResponse model
+type AddTagResponse struct {
+	ID *int `json:"id"`
 }
 
 // Validate - tag input validation

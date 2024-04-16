@@ -370,41 +370,9 @@ Response
 
 ```
 {
-    "id": number
-}
-```
-
-#### Get list of tags
-
-```http
-  GET /api/tags
-```
-
-Response
-
-```
-[
-    {
-        "id": number,
-        "name": string,
-        "user_id": number
-    } | null
-]
-```
-
-#### Get tag
-
-```http
-  GET /api/tags/:id
-```
-
-Response
-
-```
-{
-    "id": number,
-    "name": string,
-    "user_id": number
+    "data": {
+        "id": number
+    }
 }
 ```
 
@@ -437,6 +405,42 @@ Response
 ```
 {
     "status": "ok"
+}
+```
+
+#### Get tag
+
+```http
+  GET /api/tags/:id
+```
+
+Response
+
+```
+{
+    "data": {
+        "id": number,
+        "name": string
+    }
+}
+```
+
+#### Get list of tags
+
+```http
+  GET /api/tags
+```
+
+Response
+
+```
+{
+    "data": [
+        {
+            "id": number,
+            "name": string
+        }
+    ]
 }
 ```
 
