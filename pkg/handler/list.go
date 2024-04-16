@@ -27,7 +27,7 @@ func (h *Handler) createList(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]snippets.List{"data": list})
+	c.JSON(http.StatusOK, response[snippets.List]{list})
 }
 
 func (h *Handler) getAllLists(c *gin.Context) {
@@ -43,7 +43,9 @@ func (h *Handler) getAllLists(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string][]snippets.List{"data": lists})
+	c.JSON(http.StatusOK, response[[]snippets.List]{
+		append([]snippets.List{}, lists...),
+	})
 }
 
 func (h *Handler) getList(c *gin.Context) {
@@ -64,7 +66,7 @@ func (h *Handler) getList(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]snippets.List{"data": list})
+	c.JSON(http.StatusOK, response[snippets.List]{list})
 }
 
 func (h *Handler) updateList(c *gin.Context) {
@@ -90,7 +92,7 @@ func (h *Handler) updateList(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]snippets.List{"data": list})
+	c.JSON(http.StatusOK, response[snippets.List]{list})
 }
 
 func (h *Handler) deleteList(c *gin.Context) {
@@ -110,8 +112,7 @@ func (h *Handler) deleteList(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	response := map[string]int{
-		"id": listID,
-	}
-	c.JSON(http.StatusOK, response)
+	c.JSON(http.StatusOK, response[snippets.DeleteListResponse]{
+		snippets.DeleteListResponse{ID: &listID},
+	})
 }

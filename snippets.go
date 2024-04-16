@@ -6,9 +6,8 @@ import (
 
 // List of snippets model
 type List struct {
-	ID     int    `json:"id" db:"id"`
-	UserID int    `json:"user_id" db:"user_id"`
-	Name   string `json:"name" db:"name" binding:"required"`
+	ID   int    `json:"id" db:"id"`
+	Name string `json:"name" db:"name" binding:"required"`
 }
 
 // UpdateListInput model
@@ -22,6 +21,11 @@ func (i UpdateListInput) Validate() error {
 		return errors.New("update struture has no values")
 	}
 	return nil
+}
+
+// DeleteListResponse model
+type DeleteListResponse struct {
+	ID *int `json:"id"`
 }
 
 // Snippet model

@@ -30,7 +30,7 @@ func (r *ListPostgres) Create(userID int, list snippets.List) (snippets.List, er
 // GetAll - get all lists
 func (r *ListPostgres) GetAll(userID int) ([]snippets.List, error) {
 	var lists []snippets.List
-	query := fmt.Sprintf("SELECT id, user_id, name FROM %s WHERE user_id=$1", listsTable)
+	query := fmt.Sprintf("SELECT id, name FROM %s WHERE user_id=$1", listsTable)
 	err := r.db.Select(&lists, query, userID)
 	return lists, err
 }
@@ -38,7 +38,7 @@ func (r *ListPostgres) GetAll(userID int) ([]snippets.List, error) {
 // GetByID - get list by ID
 func (r *ListPostgres) GetByID(userID int, listID int) (snippets.List, error) {
 	var list snippets.List
-	query := fmt.Sprintf("SELECT id, user_id, name FROM %s WHERE user_id=$1 AND id=$2", listsTable)
+	query := fmt.Sprintf("SELECT id, name FROM %s WHERE user_id=$1 AND id=$2", listsTable)
 	err := r.db.Get(&list, query, userID, listID)
 	return list, err
 }
@@ -54,6 +54,6 @@ func (r *ListPostgres) Delete(userID int, listID int) error {
 func (r *ListPostgres) Update(userID int, listID int, input snippets.UpdateListInput) (snippets.List, error) {
 	query := fmt.Sprintf("UPDATE %s t SET name=$1 WHERE t.id=$2 AND t.user_id=$3", listsTable)
 	_, err := r.db.Exec(query, input.Name, listID, userID)
-	list := snippets.List{ID: listID, UserID: userID, Name: *input.Name}
+	list := snippets.List{ID: listID, Name: *input.Name}
 	return list, err
 }

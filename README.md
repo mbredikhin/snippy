@@ -80,7 +80,6 @@ Response
 {
     "data": {
         "id": number,
-        "user_id": string,
         "name": string
     }
 }
@@ -99,10 +98,9 @@ Response
     "data": [
         {
             "id": number,
-            "user_id": string,
             "name": string
         }
-    ] | null
+    ]
 }
 ```
 
@@ -122,7 +120,6 @@ Response
 {
     "data": {
         "id": number,
-        "user_id": string,
         "name": string
     }
 }
@@ -144,7 +141,6 @@ Response
 {
     "data": {
         "id": number,
-        "user_id": string,
         "name": string
     }
 }
@@ -164,7 +160,9 @@ Response
 
 ```
 {
-    "id": number
+    "data": {
+        "id": number
+    }
 }
 ```
 
@@ -210,7 +208,7 @@ Response
 #### Create new snippet
 
 ```http
-  POST /api/lists/:list_id/snippets
+  POST /api/lists/:id/snippets
 ```
 
 | Parameter     | Type     | Description                   |
@@ -232,7 +230,7 @@ Response
 #### Get all snippets of the list
 
 ```http
-  GET /api/lists/:list_id/snippets
+  GET /api/lists/:id/snippets
 ```
 
 Response
