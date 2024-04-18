@@ -26,20 +26,13 @@ func (h *Handler) signUp(c *gin.Context) {
 		return
 	}
 
-	id, err := h.services.Authorization.CreateUser(input)
+	_, err := h.services.Authorization.CreateUser(input)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"id": id,
-	})
-}
-
-type SignInInput struct {
-	Username string `json:"username" binding:"required"`
-	Password string `json:"password" binding:"required"`
+	c.JSON(http.StatusOK, statusResponse{"ok"})
 }
 
 // @Summary SignIn
@@ -55,7 +48,7 @@ type SignInInput struct {
 // @Failure defult {object} errorResponse
 // @Router /auth/sign-in [post]
 func (h *Handler) signIn(c *gin.Context) {
-	var input SignInInput
+	var input snippets.SignInInput
 
 	if err := c.BindJSON(&input); err != nil {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
@@ -68,7 +61,7 @@ func (h *Handler) signIn(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, map[string]interface{}{
-		"token": token,
+	c.JSON(http.StatusOK, response[snippets.SignInResponse]{
+		snippets.SignInResponse{Token: &token},
 	})
 }

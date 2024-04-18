@@ -7,3 +7,14 @@ type User struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
+
+// SignInInput model
+type SignInInput struct {
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
+// SignInResponse model
+type SignInResponse struct {
+	Token *string `json:"token"`
+}

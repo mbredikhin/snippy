@@ -39,7 +39,7 @@ Response
 
 ```
 {
-    "id": number
+    "status": "ok"
 }
 ```
 
@@ -58,7 +58,9 @@ Response
 
 ```
 {
-    "token": string
+    "data": {
+        "token": string
+    }
 }
 ```
 
