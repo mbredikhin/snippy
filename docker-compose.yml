@@ -6,6 +6,7 @@ services:
     build: ./
     command: ./scripts/wait-for-postgres.sh db air -c ./.air.conf
     volumes:
+      - ./cmd/main.go:/go/cmd/main.go
       - ./pkg/handler:/go/pkg/handler
       - ./pkg/repository:/go/pkg/repository
       - ./pkg/service:/go/pkg/service
@@ -37,3 +38,15 @@ services:
       interval: 5s
       timeout: 5s
       retries: 3
+
+  redis:
+    container_name: redis
+    restart: always
+    image: redis:latest
+    env_file:
+      - .env
+    command: redis-server /usr/local/etc/redis/redis.conf
+    volumes:
+      - ./redis.conf:/usr/local/etc/redis/redis.conf
+    ports:
+      - 6379:6379

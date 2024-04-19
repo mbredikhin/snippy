@@ -35,6 +35,15 @@ func main() {
 	if err != nil {
 		logrus.Fatalf("Failed to initialize database: %s", err.Error())
 	}
+	rdb := repository.NewRedisDB(repository.RedisConfig{
+		Host:     os.Getenv("REDIS_HOST"),
+		Port:     os.Getenv("REDIS_PORT"),
+		Password: os.Getenv("REDIS_PASSWORD"),
+		DB:       0,
+	})
+	if res, err := rdb.Ping(context.Background()).Result(); err != nil {
+		logrus.Print(res)
+	}
 	repos := repository.NewRepository(db)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
