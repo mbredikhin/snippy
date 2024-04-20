@@ -31,9 +31,14 @@ func (h *Handler) userIdentity(c *gin.Context) {
 		return
 	}
 
-	userID, err := h.services.Authorization.ParseToken(headerParts[1])
+	userID, _, err := h.services.Authorization.ParseToken(headerParts[1])
 	if err != nil {
 		newErrorResponse(c, http.StatusUnauthorized, err.Error())
+		return
+	}
+	isTokenBlacklisted := h.services.Authorization.CheckIfTokenBlacklisted(headerParts[1])
+	if isTokenBlacklisted {
+		newErrorResponse(c, http.StatusUnauthorized, "token is blacklisted")
 		return
 	}
 	c.Set(userContext, userID)

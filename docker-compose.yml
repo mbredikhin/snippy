@@ -47,6 +47,6 @@ services:
       - .env
     command: redis-server /usr/local/etc/redis/redis.conf
     volumes:
-      - ./redis.conf:/usr/local/etc/redis/redis.conf
+      - ./configs/redis.conf:/usr/local/etc/redis/redis.conf
     ports:
       - 6379:6379

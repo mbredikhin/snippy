@@ -41,10 +41,10 @@ func main() {
 		Password: os.Getenv("REDIS_PASSWORD"),
 		DB:       0,
 	})
-	if res, err := rdb.Ping(context.Background()).Result(); err != nil {
-		logrus.Print(res)
+	if err := rdb.Ping(context.Background()).Err(); err != nil {
+		logrus.Errorf("Error occured on redis init: %s", err.Error())
 	}
-	repos := repository.NewRepository(db)
+	repos := repository.NewRepository(db, rdb)
 	services := service.NewService(repos)
 	handlers := handler.NewHandler(services)
 

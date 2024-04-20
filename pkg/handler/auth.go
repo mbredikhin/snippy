@@ -2,6 +2,7 @@ package handler
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mbredikhin/snippets"
@@ -64,4 +65,21 @@ func (h *Handler) signIn(c *gin.Context) {
 	c.JSON(http.StatusOK, response[snippets.SignInResponse]{
 		snippets.SignInResponse{Token: &token},
 	})
+}
+
+func (h *Handler) logout(c *gin.Context) {
+	header := c.GetHeader(authorizationHeader)
+	token := strings.Split(header, " ")[1]
+
+	_, expiresAt, err := h.services.Authorization.ParseToken(token)
+	if err != nil {
+		newErrorResponse(c, http.StatusInternalServerError, err.Error())
+		return
+	}
+	if err := h.services.Authorization.BlacklistToken(token, expiresAt); err != nil {
+		c.JSON(http.StatusInternalServerError, err.Error())
+		return
+	}
+
+	c.JSON(http.StatusOK, statusResponse{"ok"})
 }

@@ -55,7 +55,7 @@ func (s *AuthService) GenerateToken(username, password string) (string, error) {
 }
 
 // ParseToken - JWT token parser
-func (s *AuthService) ParseToken(accessToken string) (int, error) {
+func (s *AuthService) ParseToken(accessToken string) (int, int64, error) {
 	token, err := jwt.ParseWithClaims(accessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("invalid signing method")
@@ -63,13 +63,13 @@ func (s *AuthService) ParseToken(accessToken string) (int, error) {
 		return []byte(signingKey), nil
 	})
 	if err != nil {
-		return 0, err
+		return 0, 0, err
 	}
 	claims, ok := token.Claims.(*tokenClaims)
 	if !ok {
-		return 0, errors.New("token clasims are not of type *tokenClaims")
+		return 0, 0, errors.New("token claims are not of type *tokenClaims")
 	}
-	return claims.UserID, nil
+	return claims.UserID, claims.ExpiresAt, nil
 }
 
 // generatePasswordHash - Password hash generator
@@ -77,4 +77,15 @@ func generatePasswordHash(password string) string {
 	hash := sha1.New()
 	hash.Write([]byte(password))
 	return fmt.Sprintf("%x", hash.Sum([]byte(salt)))
+}
+
+func (s *AuthService) BlacklistToken(token string, expiresAt int64) error {
+	if err := s.repo.BlacklistToken(token, expiresAt); err != nil {
+		return errors.New("unable to blacklist this token")
+	}
+	return nil
+}
+
+func (s *AuthService) CheckIfTokenBlacklisted(token string) bool {
+	return s.repo.CheckIfTokenBlacklisted(token)
 }

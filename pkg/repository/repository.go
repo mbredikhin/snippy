@@ -3,12 +3,15 @@ package repository
 import (
 	"github.com/jmoiron/sqlx"
 	"github.com/mbredikhin/snippets"
+	"github.com/redis/go-redis/v9"
 )
 
 // Authorization repo entity interface
 type Authorization interface {
 	CreateUser(user snippets.User) (int, error)
 	GetUser(username, password string) (snippets.User, error)
+	BlacklistToken(token string, expiresAt int64) error
+	CheckIfTokenBlacklisted(token string) bool
 }
 
 // List repo entity interface
@@ -70,9 +73,9 @@ type Repository struct {
 }
 
 // NewRepository - repository constructor
-func NewRepository(db *sqlx.DB) *Repository {
+func NewRepository(db *sqlx.DB, rdb *redis.Client) *Repository {
 	return &Repository{
-		Authorization:    NewAuthPostgres(db),
+		Authorization:    NewAuthRepo(db, rdb),
 		List:             NewListPostgres(db),
 		Snippet:          NewSnippetPostgres(db),
 		Tag:              NewTagPostgres(db),

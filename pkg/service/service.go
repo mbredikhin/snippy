@@ -9,7 +9,9 @@ import (
 type Authorization interface {
 	CreateUser(user snippets.User) (int, error)
 	GenerateToken(username, password string) (string, error)
-	ParseToken(token string) (int, error)
+	ParseToken(token string) (int, int64, error)
+	BlacklistToken(token string, expiresAt int64) error
+	CheckIfTokenBlacklisted(token string) bool
 }
 
 // List service interface
