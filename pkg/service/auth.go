@@ -89,3 +89,7 @@ func (s *AuthService) BlacklistToken(token string, expiresAt int64) error {
 func (s *AuthService) CheckIfTokenBlacklisted(token string) bool {
 	return s.repo.CheckIfTokenBlacklisted(token)
 }
+
+func (s *AuthService) RemoveExpiredTokensFromBlacklist(timestamp int64) error {
+	return s.repo.RemoveExpiredTokensFromBlacklist(timestamp)
+}

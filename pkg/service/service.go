@@ -12,6 +12,7 @@ type Authorization interface {
 	ParseToken(token string) (int, int64, error)
 	BlacklistToken(token string, expiresAt int64) error
 	CheckIfTokenBlacklisted(token string) bool
+	RemoveExpiredTokensFromBlacklist(timestamp int64) error
 }
 
 // List service interface

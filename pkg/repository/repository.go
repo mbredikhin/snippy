@@ -12,6 +12,7 @@ type Authorization interface {
 	GetUser(username, password string) (snippets.User, error)
 	BlacklistToken(token string, expiresAt int64) error
 	CheckIfTokenBlacklisted(token string) bool
+	RemoveExpiredTokensFromBlacklist(timestamp int64) error
 }
 
 // List repo entity interface

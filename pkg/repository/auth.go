@@ -58,3 +58,8 @@ func (r *AuthRepo) CheckIfTokenBlacklisted(token string) bool {
 	}
 	return true
 }
+
+func (r *AuthRepo) RemoveExpiredTokensFromBlacklist(timestamp int64) error {
+	ctx := context.Background()
+	return r.rdb.ZRemRangeByScore(ctx, blacklisted_tokens, "-inf", fmt.Sprint(timestamp)).Err()
+}

@@ -5,11 +5,13 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	"github.com/mbredikhin/snippets"
 	"github.com/mbredikhin/snippets/pkg/handler"
 	"github.com/mbredikhin/snippets/pkg/repository"
 	"github.com/mbredikhin/snippets/pkg/service"
+	"github.com/robfig/cron"
 
 	"github.com/joho/godotenv"
 	_ "github.com/lib/pq"
@@ -54,6 +56,7 @@ func main() {
 			logrus.Fatalf("Error occured while running http server: %s", err.Error())
 		}
 	}()
+	initCron(services)
 
 	logrus.Print("Snippets app started")
 
@@ -76,4 +79,16 @@ func initConfig() error {
 	viper.AddConfigPath("configs")
 	viper.SetConfigName("config")
 	return viper.ReadInConfig()
+}
+
+func initCron(services *service.Service) {
+	c := cron.New()
+	c.AddFunc("@midnight", func() {
+		logrus.Print(time.Now().Unix())
+		if err := services.Authorization.RemoveExpiredTokensFromBlacklist(time.Now().Unix()); err != nil {
+			logrus.Errorf("Error occured on tokens blacklist clean up: %s", err.Error())
+		}
+	})
+
+	c.Start()
 }
