@@ -40,7 +40,8 @@ func (h *Handler) getAllSnippets(c *gin.Context) {
 		newErrorResponse(c, http.StatusBadRequest, "Invalid list id parameter")
 		return
 	}
-	data, err := h.services.Snippet.GetAll(userID, listID)
+	paginationParams := getPaginationParams(c)
+	data, err := h.services.Snippet.GetAll(userID, listID, paginationParams)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

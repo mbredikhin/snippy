@@ -112,3 +112,8 @@ type AddTagToSnippetInput struct {
 type RemoveTagFromSnippetInput struct {
 	TagID *int `json:"tag_id"`
 }
+
+type PaginationParams struct {
+	Page  int
+	Limit int
+}

@@ -28,10 +28,10 @@ func (r *ListPostgres) Create(userID int, list snippets.List) (snippets.List, er
 }
 
 // GetAll - get all lists
-func (r *ListPostgres) GetAll(userID int) ([]snippets.List, error) {
+func (r *ListPostgres) GetAll(userID int, paginationParams *snippets.PaginationParams) ([]snippets.List, error) {
 	var lists []snippets.List
-	query := fmt.Sprintf("SELECT id, name FROM %s WHERE user_id=$1", listsTable)
-	err := r.db.Select(&lists, query, userID)
+	query := fmt.Sprintf("SELECT id, name FROM %s WHERE user_id=$1 LIMIT $2 OFFSET $3", listsTable)
+	err := r.db.Select(&lists, query, userID, paginationParams.Limit, (paginationParams.Page-1)*paginationParams.Limit)
 	return lists, err
 }
 

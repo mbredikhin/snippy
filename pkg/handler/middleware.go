@@ -3,14 +3,17 @@ package handler
 import (
 	"errors"
 	"net/http"
+	"strconv"
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mbredikhin/snippets"
 )
 
 const (
 	authorizationHeader = "Authorization"
 	userContext         = "userID"
+	paginationContext   = "pagination"
 )
 
 func (h *Handler) userIdentity(c *gin.Context) {
@@ -54,4 +57,32 @@ func getUserID(c *gin.Context) (int, error) {
 		return 0, errors.New("user id is of invalid type")
 	}
 	return idInt, nil
+}
+
+func getPaginationParams(c *gin.Context) *snippets.PaginationParams {
+	params, ok := c.Get(paginationContext)
+	if ok {
+		pagination := params.(snippets.PaginationParams)
+		return &snippets.PaginationParams{
+			Page:  pagination.Page,
+			Limit: pagination.Limit,
+		}
+	}
+	return nil
+}
+
+func (h *Handler) collectPaginationParams(c *gin.Context) {
+	paginationParams := snippets.PaginationParams{}
+	var err error
+	paginationParams.Page, err = strconv.Atoi(c.DefaultQuery("page", "1"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "page param is invalid")
+		return
+	}
+	paginationParams.Limit, err = strconv.Atoi(c.DefaultQuery("limit", "25"))
+	if err != nil {
+		newErrorResponse(c, http.StatusBadRequest, "limit param is invalid")
+		return
+	}
+	c.Set(paginationContext, paginationParams)
 }

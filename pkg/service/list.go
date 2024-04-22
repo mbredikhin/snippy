@@ -21,8 +21,8 @@ func (l *ListService) Create(userID int, list snippets.List) (snippets.List, err
 }
 
 // GetAll - Get all user's lists
-func (l *ListService) GetAll(userID int) ([]snippets.List, error) {
-	return l.repo.GetAll(userID)
+func (l *ListService) GetAll(userID int, paginationParams *snippets.PaginationParams) ([]snippets.List, error) {
+	return l.repo.GetAll(userID, paginationParams)
 }
 
 // GetByID - Get list

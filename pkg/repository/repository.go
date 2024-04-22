@@ -18,7 +18,7 @@ type Authorization interface {
 // List repo entity interface
 type List interface {
 	Create(userID int, list snippets.List) (snippets.List, error)
-	GetAll(userID int) ([]snippets.List, error)
+	GetAll(userID int, paginationParams *snippets.PaginationParams) ([]snippets.List, error)
 	GetByID(userID int, listID int) (snippets.List, error)
 	Delete(userID int, listID int) error
 	Update(userID int, listID int, input snippets.UpdateListInput) (snippets.List, error)
@@ -27,7 +27,7 @@ type List interface {
 // Snippet repo entity interface
 type Snippet interface {
 	Create(listID int, snippet snippets.Snippet) (int, error)
-	GetAll(userID, listID int) ([]snippets.Snippet, error)
+	GetAll(userID, listID int, paginationParams *snippets.PaginationParams) ([]snippets.Snippet, error)
 	GetByID(userID, snippetID int) (snippets.Snippet, error)
 	Delete(userID, snippetID int) error
 	Update(userID, snippetID int, input snippets.UpdateSnippetInput) error
