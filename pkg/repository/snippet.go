@@ -29,14 +29,15 @@ func (r *SnippetPostgres) Create(listID int, snippet snippets.Snippet) (int, err
 }
 
 // GetAll - get all snippets
-func (r *SnippetPostgres) GetAll(userID, listID int) ([]snippets.Snippet, error) {
+func (r *SnippetPostgres) GetAll(userID, listID int, paginationParams *snippets.PaginationParams) ([]snippets.Snippet, error) {
 	var snippets []snippets.Snippet
 	query := fmt.Sprintf(`SELECT st.id, st.list_id, st.name, st.language_id, st.content 
 	FROM %s st 
 	JOIN %s lt ON st.list_id = lt.id 
 	JOIN %s ut ON lt.user_id = ut.id 
-	WHERE lt.id=$1 AND ut.id=$2`, snippetsTable, listsTable, usersTable)
-	err := r.db.Select(&snippets, query, listID, userID)
+	WHERE lt.id=$1 AND ut.id=$2
+	LIMIT $3 OFFSET $4`, snippetsTable, listsTable, usersTable)
+	err := r.db.Select(&snippets, query, listID, userID, paginationParams.Limit, (paginationParams.Page-1)*paginationParams.Limit)
 	return snippets, err
 }
 

@@ -36,8 +36,8 @@ func (h *Handler) getAllLists(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-
-	lists, err := h.services.List.GetAll(userID)
+	paginationParams := getPaginationParams(c)
+	lists, err := h.services.List.GetAll(userID, paginationParams)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

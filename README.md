@@ -29,7 +29,9 @@ make db-seed
   POST /auth/sign-up
 ```
 
-| Parameter  | Type     | Description                 |
+Body:
+
+| Key        | Type     | Description                 |
 | :--------- | :------- | :-------------------------- |
 | `username` | `string` | **Required**. Your username |
 | `password` | `string` | **Required**. Your password |
@@ -49,7 +51,9 @@ Response
   POST /auth/sign-in
 ```
 
-| Parameter  | Type     | Description                 |
+Body:
+
+| Key        | Type     | Description                 |
 | :--------- | :------- | :-------------------------- |
 | `username` | `string` | **Required**. Your username |
 | `password` | `string` | **Required**. Your password |
@@ -72,9 +76,11 @@ Send given token in Authorization HTTP header – `Authorization: "Bearer %s" `
   POST /api/lists
 ```
 
-| Parameter | Type     | Description                   |
-| :-------- | :------- | :---------------------------- |
-| `name`    | `string` | **Required**. Collection name |
+Body:
+
+| Key    | Type     | Description                   |
+| :----- | :------- | :---------------------------- |
+| `name` | `string` | **Required**. Collection name |
 
 Response
 
@@ -92,6 +98,13 @@ Response
 ```http
   GET /api/lists
 ```
+
+Query parameters:
+
+| Parameter | Type     | Description      |
+| :-------- | :------- | :--------------- |
+| `page`    | `number` | Page             |
+| `limit`   | `number` | Pagination limit |
 
 Response
 
@@ -111,6 +124,8 @@ Response
 ```http
   GET /api/lists/:id
 ```
+
+Query parameters:
 
 | Parameter | Type     | Description                 |
 | :-------- | :------- | :-------------------------- |
@@ -133,9 +148,11 @@ Response
   PUT /api/lists/:id
 ```
 
-| Parameter | Type     | Description                   |
-| :-------- | :------- | :---------------------------- |
-| `name`    | `string` | **Required**. Collection name |
+Body:
+
+| Key    | Type     | Description                   |
+| :----- | :------- | :---------------------------- |
+| `name` | `string` | **Required**. Collection name |
 
 Response
 
@@ -154,9 +171,11 @@ Response
   DELETE /api/lists/:id
 ```
 
-| Parameter | Type     | Description                 |
-| :-------- | :------- | :-------------------------- |
-| `id`      | `number` | **Required**. Collection ID |
+Body:
+
+| Key  | Type     | Description                 |
+| :--- | :------- | :-------------------------- |
+| `id` | `number` | **Required**. Collection ID |
 
 Response
 
@@ -174,9 +193,11 @@ Response
   POST /api/languages
 ```
 
-| Parameter | Type     | Description                 |
-| :-------- | :------- | :-------------------------- |
-| `name`    | `string` | **Required**. Language name |
+Body:
+
+| Key    | Type     | Description                 |
+| :----- | :------- | :-------------------------- |
+| `name` | `string` | **Required**. Language name |
 
 Response
 
@@ -213,7 +234,9 @@ Response
   POST /api/lists/:id/snippets
 ```
 
-| Parameter     | Type     | Description                   |
+Body:
+
+| Key           | Type     | Description                   |
 | :------------ | :------- | :---------------------------- |
 | `name`        | `string` | **Required**. Snippet name    |
 | `language_id` | `number` | **Required**. Language ID     |
@@ -234,6 +257,13 @@ Response
 ```http
   GET /api/lists/:id/snippets
 ```
+
+Query parameters:
+
+| Parameter | Type     | Description      |
+| :-------- | :------- | :--------------- |
+| `page`    | `number` | Page             |
+| `limit`   | `number` | Pagination limit |
 
 Response
 
@@ -277,7 +307,9 @@ Response
   PUT /api/snippets/:id
 ```
 
-| Parameter     | Type     | Description                   |
+Body:
+
+| Key           | Type     | Description                   |
 | :------------ | :------- | :---------------------------- |
 | `name`        | `string` | **Required**. Snippet name    |
 | `language_id` | `number` | **Required**. Language ID     |
@@ -312,9 +344,11 @@ Response
   POST /api/snippets/favourites
 ```
 
-| Parameter | Type     | Description              |
-| :-------- | :------- | :----------------------- |
-| `id`      | `number` | **Required**. Snippet ID |
+Body:
+
+| Key  | Type     | Description              |
+| :--- | :------- | :----------------------- |
+| `id` | `number` | **Required**. Snippet ID |
 
 Response
 
@@ -330,9 +364,11 @@ Response
   DELETE /api/snippets/favourites
 ```
 
-| Parameter | Type     | Description              |
-| :-------- | :------- | :----------------------- |
-| `id`      | `number` | **Required**. Snippet ID |
+Body:
+
+| Key  | Type     | Description              |
+| :--- | :------- | :----------------------- |
+| `id` | `number` | **Required**. Snippet ID |
 
 Response
 
@@ -362,9 +398,11 @@ Response
   POST /api/tags
 ```
 
-| Parameter | Type     | Description          |
-| :-------- | :------- | :------------------- |
-| `name`    | `string` | **Required**. Tag ID |
+Body:
+
+| Key    | Type     | Description          |
+| :----- | :------- | :------------------- |
+| `name` | `string` | **Required**. Tag ID |
 
 Response
 
@@ -382,9 +420,11 @@ Response
   PUT /api/tags/:id
 ```
 
-| Parameter | Type     | Description          |
-| :-------- | :------- | :------------------- |
-| `id`      | `number` | **Required**. Tag ID |
+Body:
+
+| Key  | Type     | Description          |
+| :--- | :------- | :------------------- |
+| `id` | `number` | **Required**. Tag ID |
 
 Response
 
@@ -464,9 +504,11 @@ Response
   POST /api/snippets/:id/tags
 ```
 
-| Parameter | Type     | Description          |
-| :-------- | :------- | :------------------- |
-| `tag_id`  | `number` | **Required**. Tag ID |
+Body:
+
+| Key      | Type     | Description          |
+| :------- | :------- | :------------------- |
+| `tag_id` | `number` | **Required**. Tag ID |
 
 Response
 
@@ -482,9 +524,11 @@ Response
   DELETE /api/snippets/:id/tags
 ```
 
-| Parameter | Type     | Description          |
-| :-------- | :------- | :------------------- |
-| `tag_id`  | `number` | **Required**. Tag ID |
+Body:
+
+| Key      | Type     | Description          |
+| :------- | :------- | :------------------- |
+| `tag_id` | `number` | **Required**. Tag ID |
 
 Response
 
