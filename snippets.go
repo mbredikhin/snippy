@@ -30,11 +30,12 @@ type DeleteListResponse struct {
 
 // Snippet model
 type Snippet struct {
-	ID         int    `json:"id" db:"id"`
-	ListID     int    `json:"list_id" db:"list_id"`
-	Name       string `json:"name" db:"name" binding:"required"`
-	LanguageID int    `json:"language_id" db:"language_id" binding:"required"`
-	Content    string `json:"content" db:"content" binding:"required"`
+	ID          int    `json:"id" db:"id"`
+	ListID      int    `json:"list_id" db:"list_id"`
+	Name        string `json:"name" db:"name" binding:"required"`
+	LanguageID  int    `json:"language_id" db:"language_id" binding:"required"`
+	Description string `json:"description" db:"description" binding:"required"`
+	Content     string `json:"content" db:"content" binding:"required"`
 }
 
 // CreateSnippetRespnse model
@@ -44,10 +45,11 @@ type CreateSnippetResponse struct {
 
 // UpdateSnippetInput model
 type UpdateSnippetInput struct {
-	Name       *string `json:"name"`
-	ListID     *int    `json:"list_id"`
-	LanguageID *int    `json:"language_id"`
-	Content    *string `json:"content"`
+	Name        *string `json:"name"`
+	ListID      *int    `json:"list_id"`
+	LanguageID  *int    `json:"language_id"`
+	Description *string `json:"description"`
+	Content     *string `json:"content"`
 }
 
 // AddSnippetToFavouritesInput model

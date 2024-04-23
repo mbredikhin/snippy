@@ -236,11 +236,12 @@ Response
 
 Body:
 
-| Key           | Type     | Description                   |
-| :------------ | :------- | :---------------------------- |
-| `name`        | `string` | **Required**. Snippet name    |
-| `language_id` | `number` | **Required**. Language ID     |
-| `content`     | `string` | **Required**. Snippet content |
+| Key           | Type     | Description                    |
+| :------------ | :------- | :----------------------------- |
+| `name`        | `string` | **Required**. Snippet name     |
+| `language_id` | `number` | **Required**. Language ID      |
+| `description` | `string` | **Required**. Text description |
+| `content`     | `string` | **Required**. Snippet content  |
 
 Response
 
@@ -275,6 +276,7 @@ Response
             "list_id": number,
             "name": string,
             "language_id": number,
+            "description": string,
             "content": string
         }
     ]
@@ -296,6 +298,7 @@ Response
         "list_id": number,
         "name": string,
         "language_id": number,
+        "description": number,
         "content": string
     }
 }
@@ -309,12 +312,13 @@ Response
 
 Body:
 
-| Key           | Type     | Description                   |
-| :------------ | :------- | :---------------------------- |
-| `name`        | `string` | **Required**. Snippet name    |
-| `language_id` | `number` | **Required**. Language ID     |
-| `list_id`     | `number` | **Required**. Collection ID   |
-| `content`     | `string` | **Required**. Snippet content |
+| Key           | Type     | Description                    |
+| :------------ | :------- | :----------------------------- |
+| `name`        | `string` | **Required**. Snippet name     |
+| `language_id` | `number` | **Required**. Language ID      |
+| `list_id`     | `number` | **Required**. Collection ID    |
+| `description` | `string` | **Required**. Text description |
+| `content`     | `string` | **Required**. Snippet content  |
 
 Response
 
