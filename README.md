@@ -261,10 +261,11 @@ Response
 
 Query parameters:
 
-| Parameter | Type     | Description      |
-| :-------- | :------- | :--------------- |
-| `page`    | `number` | Page             |
-| `limit`   | `number` | Pagination limit |
+| Parameter | Type       | Description                                        |
+| :-------- | :--------- | :------------------------------------------------- |
+| `tag_ids` | `number[]` | Filters snippets with any of entered tags assigned |
+| `page`    | `number`   | Page                                               |
+| `limit`   | `number`   | Pagination limit                                   |
 
 Response
 

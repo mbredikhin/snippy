@@ -41,7 +41,8 @@ func (h *Handler) getAllSnippets(c *gin.Context) {
 		return
 	}
 	paginationParams := getPaginationParams(c)
-	data, err := h.services.Snippet.GetAll(userID, listID, paginationParams)
+	tagIDs := c.DefaultQuery("tag_ids", "")
+	data, err := h.services.Snippet.GetAll(userID, listID, tagIDs, paginationParams)
 	if err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return

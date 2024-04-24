@@ -27,7 +27,7 @@ type List interface {
 // Snippet repo entity interface
 type Snippet interface {
 	Create(listID int, snippet snippets.Snippet) (int, error)
-	GetAll(userID, listID int, paginationParams *snippets.PaginationParams) ([]snippets.Snippet, error)
+	GetAll(userID, listID int, tagIDs string, paginationParams *snippets.PaginationParams) ([]snippets.Snippet, error)
 	GetByID(userID, snippetID int) (snippets.Snippet, error)
 	Delete(userID, snippetID int) error
 	Update(userID, snippetID int, input snippets.UpdateSnippetInput) error

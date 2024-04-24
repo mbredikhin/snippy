@@ -28,8 +28,8 @@ func (s *SnippetService) Create(listID int, snippet snippets.Snippet) (int, erro
 }
 
 // GetAll - Get all snippets from list
-func (s *SnippetService) GetAll(userID, listID int, paginationParams *snippets.PaginationParams) ([]snippets.Snippet, error) {
-	return s.snippetRepo.GetAll(userID, listID, paginationParams)
+func (s *SnippetService) GetAll(userID, listID int, tagIDs string, paginationParams *snippets.PaginationParams) ([]snippets.Snippet, error) {
+	return s.snippetRepo.GetAll(userID, listID, tagIDs, paginationParams)
 }
 
 // GetByID - Get snippet
